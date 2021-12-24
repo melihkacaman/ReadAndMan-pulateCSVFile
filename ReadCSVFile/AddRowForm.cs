@@ -49,16 +49,44 @@ namespace ReadCSVFile
 
         private void button_click(object sender, EventArgs e)
         {
+            bool control = true; 
+            List<string> textString = new List<string>(); 
             foreach (TextBox item in texts)
             {
                 if (string.IsNullOrWhiteSpace(item.Text))
                 {
                     MessageBox.Show("You can't add empty information to the table!");
+                    control = false; 
+                    Close(); 
+                    Dispose(); 
+                   
+                    break;
                 }
-                else { 
-                    // addding section 
+
+                textString.Add(item.Text); 
+            }
+
+            if (control == true) {
+
+                string[] arguments = new string[textString.Count];
+                for (int i = 0; i < textString.Count; i++)
+                {
+                    arguments[i] = textString[i];
+                }
+
+                try
+                {
+                    DataTable dt = (DataTable)gridViewFrm1.DataSource;
+                    dt.Rows.Add(arguments);
+                    gridViewFrm1.DataSource = dt;
+                    this.Dispose();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error, check what you typed");
                 }
             }
         }
     }
 }
+ 

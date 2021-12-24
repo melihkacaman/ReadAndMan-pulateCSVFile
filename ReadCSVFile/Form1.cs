@@ -79,8 +79,10 @@ namespace ReadCSVFile
 
         private void button3_Click(object sender, EventArgs e)
         {
-            AddRowForm addrow = new AddRowForm(dataGridView1);
-            addrow.ShowDialog(); 
+            if (dataGridView1.DataSource != null) {
+                AddRowForm addrow = new AddRowForm(dataGridView1);
+                addrow.ShowDialog();
+            } 
         }
     }
 }
