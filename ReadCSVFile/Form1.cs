@@ -79,10 +79,20 @@ namespace ReadCSVFile
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.DataSource != null) {
+            if (dataGridView1.DataSource != null)
+            {
                 AddRowForm addrow = new AddRowForm(dataGridView1);
                 addrow.ShowDialog();
-            } 
+            }
+            else {
+                MessageBox.Show("Firstly, you have to choose a csv file!");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DataTable data = (DataTable)dataGridView1.DataSource;
+            CSVHelper.exportDataTableAsCSV(data, Environment.CurrentDirectory);
         }
     }
 }
