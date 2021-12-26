@@ -76,7 +76,7 @@ namespace ReadCSVFile
 
                 try
                 {
-                    DataTable dt = (DataTable)gridViewFrm1.DataSource;
+                    DataTable dt = (DataTable)gridViewFrm1.DataSource;                                       
                     dt.Rows.Add(arguments);
                     gridViewFrm1.DataSource = dt;
                     this.Dispose();

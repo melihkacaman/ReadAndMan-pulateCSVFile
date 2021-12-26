@@ -38,6 +38,7 @@ namespace ReadCSVFile
 
             var result = CSVHelper.readCSV(filePathRes, ',', true);
 
+            result.Rows.RemoveAt(result.Rows.Count - 1);
             dataGridView1.DataSource = result; 
             
         }
