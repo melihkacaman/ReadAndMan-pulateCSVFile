@@ -29,7 +29,7 @@ namespace ReadCSVFile
             return dt; 
         }
 
-        public static void exportDataTableAsCSV(DataTable dtDataTable, string strFilePath = @"C:\") {
+        public static void exportDataTableAsCSV(DataTable dtDataTable, string strFilePath = @"C:\exportingFile.csv") {
             StreamWriter sw = new StreamWriter(strFilePath, false);
             //headers    
             for (int i = 0; i < dtDataTable.Columns.Count; i++)
