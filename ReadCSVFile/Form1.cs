@@ -114,7 +114,14 @@ namespace ReadCSVFile
                 if (comboBox1.SelectedIndex != comboBox2.SelectedIndex)
                 {
                     // do your job 
-                    
+                    List<string> Xx = new List<string>();
+                    List<string> Yy = new List<string>();
+
+                    for(int i = dataGridView1.SelectedRows.Count - 1; i>= 0; i--)
+                    {
+                        Xx.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox1.SelectedIndex].Value.ToString());
+                        Yy.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox2.SelectedIndex].Value.ToString());
+                    }
                 }
                 else {
                     MessageBox.Show("Please, choose different columns for charting!");
