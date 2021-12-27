@@ -101,16 +101,18 @@ namespace ReadCSVFile
 
         private void button4_Click(object sender, EventArgs e)
         {
-            try
-            {
-                DataTable data = (DataTable)dataGridView1.DataSource;
-                CSVHelper.exportDataTableAsCSV(data);
+            if (dataGridView1.DataSource != null) {
+                try
+                {
+                    DataTable data = (DataTable)dataGridView1.DataSource;
+                    CSVHelper.exportDataTableAsCSV(data);
 
-                MessageBox.Show("Successfully saved the file on C disk."); 
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("Error !");
+                    MessageBox.Show("Successfully saved the file on C disk.");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error !");
+                }
             }
         }
 
