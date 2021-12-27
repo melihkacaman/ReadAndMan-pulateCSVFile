@@ -26,6 +26,12 @@ namespace ReadCSVFile
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (dataGridView1.DataSource != null) {
+                dataGridView1.DataSource = null;
+                comboBox1.DataSource = null;
+                comboBox2.DataSource = null; 
+            }
+
             OpenFileDialog file = new OpenFileDialog();
             file.InitialDirectory = "C:";
             file.Filter = "CSV File |*.csv";

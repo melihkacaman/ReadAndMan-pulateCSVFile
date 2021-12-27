@@ -11,9 +11,11 @@ namespace ReadCSVFile
     public class CSVHelper
     {
 
-        public static List<string> columnsName = new List<string>(); 
+        public static List<string> columnsName = null;  
 
         public static DataTable readCSV(string filePath, char seperator, bool columns = false) {
+            columnsName = new List<string>(); 
+
             var dt = new DataTable();
             if (columns == true) {
                 // Creating the columns 
