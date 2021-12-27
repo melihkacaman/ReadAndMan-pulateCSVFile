@@ -20,7 +20,7 @@ namespace ReadCSVFile
 
         private void GraphForm_Load(object sender, EventArgs e)
         {
-           // data will be here 
+           
         }
 
         private void firstSeries() 

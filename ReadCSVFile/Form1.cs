@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -39,8 +40,10 @@ namespace ReadCSVFile
             var result = CSVHelper.readCSV(filePathRes, ',', true);
 
             result.Rows.RemoveAt(result.Rows.Count - 1);
-            dataGridView1.DataSource = result; 
+            dataGridView1.DataSource = result;
             
+            comboBox1.DataSource = CSVHelper.columnsName;
+            comboBox2.DataSource = CSVHelper.columnsName.ToArray();
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -107,8 +110,16 @@ namespace ReadCSVFile
 
         private void button5_Click(object sender, EventArgs e)
         {
-            GraphForm graph = new GraphForm();
-            graph.ShowDialog(); 
+            if (dataGridView1.DataSource != null) {
+                if (comboBox1.SelectedIndex != comboBox2.SelectedIndex)
+                {
+                    // do your job 
+                    
+                }
+                else {
+                    MessageBox.Show("Please, choose different columns for charting!");
+                }
+            }
         }
     }
 }

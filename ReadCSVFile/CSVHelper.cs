@@ -10,6 +10,9 @@ namespace ReadCSVFile
 {
     public class CSVHelper
     {
+
+        public static List<string> columnsName = new List<string>(); 
+
         public static DataTable readCSV(string filePath, char seperator, bool columns = false) {
             var dt = new DataTable();
             if (columns == true) {
@@ -17,7 +20,12 @@ namespace ReadCSVFile
                 File.ReadLines(filePath).Take(1)
                     .SelectMany(x => x.Split(new[] { seperator }, StringSplitOptions.RemoveEmptyEntries))
                     .ToList()
-                    .ForEach(x => dt.Columns.Add(x.Trim()));
+                    .ForEach(x => columnsName.Add(x.Trim()));
+
+                foreach (string item in columnsName)
+                {
+                    dt.Columns.Add(item);
+                }
             }
 
             // Adding Rows
