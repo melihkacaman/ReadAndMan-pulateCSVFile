@@ -45,6 +45,7 @@ namespace ReadCSVFile
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -163,7 +164,7 @@ namespace ReadCSVFile
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 129);
+            this.button5.Location = new System.Drawing.Point(12, 156);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(209, 66);
             this.button5.TabIndex = 10;
@@ -173,6 +174,7 @@ namespace ReadCSVFile
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.comboBox2);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.label3);
@@ -223,6 +225,16 @@ namespace ReadCSVFile
             this.comboBox2.Size = new System.Drawing.Size(161, 24);
             this.comboBox2.TabIndex = 15;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(60, 129);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(129, 21);
+            this.checkBox1.TabIndex = 17;
+            this.checkBox1.Text = "Scale your data";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -267,6 +279,7 @@ namespace ReadCSVFile
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

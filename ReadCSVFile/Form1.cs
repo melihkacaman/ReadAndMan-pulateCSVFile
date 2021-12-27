@@ -120,8 +120,11 @@ namespace ReadCSVFile
                     for(int i = dataGridView1.SelectedRows.Count - 1; i>= 0; i--)
                     {
                         Xx.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox1.SelectedIndex].Value.ToString());
-                        Yy.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox2.SelectedIndex].Value.ToString());
+                        Yy.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox2.SelectedIndex].Value.ToString());                                                
                     }
+                    
+                    GraphForm graphForm = new GraphForm(Xx, Yy, comboBox1.SelectedItem.ToString(), comboBox2.SelectedItem.ToString(), checkBox1.Checked);
+                    graphForm.ShowDialog();
                 }
                 else {
                     MessageBox.Show("Please, choose different columns for charting!");
