@@ -35,7 +35,7 @@ namespace ReadCSVFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 771);
             this.Name = "AddRowForm";
             this.Text = "AddRowForm";
             this.Load += new System.EventHandler(this.AddRowForm_Load);

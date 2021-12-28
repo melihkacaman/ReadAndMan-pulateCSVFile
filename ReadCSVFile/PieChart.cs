@@ -15,12 +15,15 @@ namespace ReadCSVFile
     public partial class PieChart : Form
     {
         private string dataTitle;
-        private List<string> data;       
+        private List<string> data;
+        private Random rnd;
+        bool once = false;
+        List<Label> labels = new List<Label>();
         public PieChart(List<string> data, string dataTitle)
         {
             this.data = data;
             this.dataTitle = dataTitle;
-            
+            this.rnd = new Random(); 
             InitializeComponent();
         }
 
@@ -63,20 +66,27 @@ namespace ReadCSVFile
             using (Graphics myPieGraphic = this.CreateGraphics())
             {
                 Point myPieLocation = new Point(0, 0);
-                Size myPieSize = new Size(150, 150);
+                Size myPieSize = new Size(this.Size.Width / 2, this.Size.Height / 2);
 
                 int[] percents = new int[pieDatas.Count];
                 Color[] colors = new Color[pieDatas.Count];
-
+                int j = 0; 
                 for (int i = 0; i < pieDatas.Count; i++)
                 {
-                    percents[i] = Convert.ToInt32(Math.Floor(pieDatas[i].count_percentage));
-                    Random rnd = new Random(); 
-                    Color randomColor = System.Drawing.ColorTranslator.FromHtml(getRandColor());
-
+                    percents[i] = Convert.ToInt32(Math.Floor(pieDatas[i].count_percentage));                     
+                    Color randomColor = System.Drawing.ColorTranslator.FromHtml(getRandColor());                    
                     colors[i] = randomColor;
+
+                    Label label = new Label();
+                    label.Text = pieDatas[i].name;
+                    
+                    label.SetBounds(380, 12 + j, 30, 30);
+                    j += 30;
+                    label.BackColor = randomColor;
+                    labels.Add(label);
                 }
 
+                
                 DrawPieChart(percents, colors, myPieGraphic, myPieLocation, myPieSize);
             }
         }
@@ -117,22 +127,28 @@ namespace ReadCSVFile
 
         private void PieChart_Load(object sender, EventArgs e)
         {
-                  
-            
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            DrawPieChartOnForm(prepareDataForPie());
-        }
+       
 
         private string getRandColor()
-        {
-            Random rnd = new Random();
+        {            
             string hexOutput = String.Format("{0:X}", rnd.Next(0, 0xFFFFFF));
             while (hexOutput.Length < 6)
                 hexOutput = "0" + hexOutput;
             return "#" + hexOutput;
+        }
+
+        private void PieChart_Paint(object sender, PaintEventArgs e)
+        {
+            
+            DrawPieChartOnForm(prepareDataForPie());
+            foreach (var item in labels)
+            {
+                this.Controls.Add(item);
+            }
+            once = true; 
+            
         }
     }
 }
