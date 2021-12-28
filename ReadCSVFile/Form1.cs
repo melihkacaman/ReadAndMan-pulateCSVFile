@@ -29,7 +29,8 @@ namespace ReadCSVFile
             if (dataGridView1.DataSource != null) {
                 dataGridView1.DataSource = null;
                 comboBox1.DataSource = null;
-                comboBox2.DataSource = null; 
+                comboBox2.DataSource = null;
+                comboBox3.DataSource = null; 
             }
 
             OpenFileDialog file = new OpenFileDialog();
@@ -50,6 +51,7 @@ namespace ReadCSVFile
             
             comboBox1.DataSource = CSVHelper.columnsName;
             comboBox2.DataSource = CSVHelper.columnsName.ToArray();
+            comboBox3.DataSource = CSVHelper.columnsName.ToArray();
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -135,6 +137,30 @@ namespace ReadCSVFile
                     graphForm.ShowDialog();
                 }
                 else {
+                    MessageBox.Show("Please, choose different columns for charting!");
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.DataSource != null)
+            {
+                if (comboBox3.SelectedItem != null)
+                {
+                    // do your job 
+                    List<string> Xx = new List<string>();                    
+
+                    for (int i = dataGridView1.SelectedRows.Count - 1; i >= 0; i--)
+                    {
+                        Xx.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox3.SelectedIndex].Value.ToString());                        
+                    }                    
+
+                    PieChart pieChart = new PieChart(Xx, comboBox3.SelectedItem.ToString());
+                    pieChart.ShowDialog();
+                }
+                else
+                {
                     MessageBox.Show("Please, choose different columns for charting!");
                 }
             }
