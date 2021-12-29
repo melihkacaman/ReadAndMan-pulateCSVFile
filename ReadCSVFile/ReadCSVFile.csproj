@@ -70,6 +70,13 @@
     <Compile Include="GraphForm.Designer.cs">
       <DependentUpon>GraphForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HeatMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HeatMap.Designer.cs">
+      <DependentUpon>HeatMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HeatPoint.cs" />
     <Compile Include="PieChart.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GraphForm.resx">
       <DependentUpon>GraphForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HeatMap.resx">
+      <DependentUpon>HeatMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PieChart.resx">
       <DependentUpon>PieChart.cs</DependentUpon>

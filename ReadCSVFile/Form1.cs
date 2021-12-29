@@ -165,5 +165,11 @@ namespace ReadCSVFile
                 }
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            HeatMap heatMap = new HeatMap();
+            heatMap.Show(); 
+        }
     }
 }

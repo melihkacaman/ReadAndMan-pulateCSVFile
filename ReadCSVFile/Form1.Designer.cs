@@ -49,6 +49,7 @@ namespace ReadCSVFile
             this.button6 = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -271,11 +272,22 @@ namespace ReadCSVFile
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Pie Chart";
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(1063, 624);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(200, 23);
+            this.button7.TabIndex = 21;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 659);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button4);
@@ -321,6 +333,7 @@ namespace ReadCSVFile
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button7;
     }
 }
 
