@@ -58,6 +58,7 @@
       <DependentUpon>AddRowForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CSVHelper.cs" />
+    <Compile Include="FeatureScaler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

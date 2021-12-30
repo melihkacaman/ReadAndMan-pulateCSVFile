@@ -104,9 +104,9 @@ namespace ReadCSVFile
         {
             Bitmap bMap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Random rRand = new Random();
-            int iX;
-            int iY;
-            byte iIntense;
+            int iX;   // 0 - 200 
+            int iY;   // 0 - 200 
+            byte iIntense; // 0 - 120 
             for (int i = 0; i < 500; i++)
             {
                 iX = rRand.Next(0, 200);
