@@ -30,7 +30,11 @@ namespace ReadCSVFile
                 dataGridView1.DataSource = null;
                 comboBox1.DataSource = null;
                 comboBox2.DataSource = null;
-                comboBox3.DataSource = null; 
+                comboBox3.DataSource = null;
+
+                comboBox4.DataSource = null;
+                comboBox5.DataSource = null;
+                comboBox6.DataSource = null;
             }
 
             OpenFileDialog file = new OpenFileDialog();
@@ -41,17 +45,20 @@ namespace ReadCSVFile
            
             if (file.ShowDialog() == DialogResult.OK)
             {
-                filePathRes = file.FileName;               
-            }
+                filePathRes = file.FileName;
 
-            var result = CSVHelper.readCSV(filePathRes, ',', true);
+                var result = CSVHelper.readCSV(filePathRes, ',', true);
 
-            result.Rows.RemoveAt(result.Rows.Count - 1);
-            dataGridView1.DataSource = result;
-            
-            comboBox1.DataSource = CSVHelper.columnsName;
-            comboBox2.DataSource = CSVHelper.columnsName.ToArray();
-            comboBox3.DataSource = CSVHelper.columnsName.ToArray();
+                result.Rows.RemoveAt(result.Rows.Count - 1);
+                dataGridView1.DataSource = result;
+
+                comboBox1.DataSource = CSVHelper.columnsName;
+                comboBox2.DataSource = CSVHelper.columnsName.ToArray();
+                comboBox3.DataSource = CSVHelper.columnsName.ToArray();
+                comboBox4.DataSource = CSVHelper.columnsName.ToArray(); ;
+                comboBox5.DataSource = CSVHelper.columnsName.ToArray(); ;
+                comboBox6.DataSource = CSVHelper.columnsName.ToArray(); ;
+            }            
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
