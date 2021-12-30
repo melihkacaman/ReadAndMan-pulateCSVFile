@@ -175,8 +175,36 @@ namespace ReadCSVFile
 
         private void button7_Click(object sender, EventArgs e)
         {
-            HeatMap heatMap = new HeatMap();
-            heatMap.Show(); 
+            if (dataGridView1.DataSource != null)
+            {
+                if (comboBox4.SelectedItem != null && comboBox5.SelectedItem != null && comboBox6.SelectedItem != null)
+                {
+                    if (comboBox4.SelectedItem != comboBox5.SelectedItem && comboBox4.SelectedItem != comboBox6.SelectedItem
+                        && comboBox5.SelectedItem != comboBox6.SelectedItem)
+                    {
+                        List<string> Xx = new List<string>();
+                        List<string> Yy = new List<string>();
+                        List<string> Zz = new List<string>();
+
+                        for (int i = dataGridView1.SelectedRows.Count - 1; i >= 0; i--)
+                        {
+                            Xx.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox4.SelectedIndex].Value.ToString());
+                            Yy.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox5.SelectedIndex].Value.ToString());
+                            Zz.Add(dataGridView1.Rows[dataGridView1.SelectedRows[i].Index].Cells[comboBox6.SelectedIndex].Value.ToString());
+                        }
+
+                        HeatMap heatMap = new HeatMap(Xx, Yy, Zz);
+                        heatMap.ShowDialog(); 
+                    }
+                    else {
+                        MessageBox.Show("Dimensions can't be same columns ! ");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error !");
+                }
+            }
         }
     }
 }

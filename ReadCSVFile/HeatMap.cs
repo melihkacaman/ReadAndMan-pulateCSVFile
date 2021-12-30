@@ -14,10 +14,21 @@ namespace ReadCSVFile
 {
     public partial class HeatMap : Form
     {
-        private List<HeatPoint> heatPoints; 
-        public HeatMap()
+        private List<HeatPoint> heatPoints;
+        private List<string> Xx;
+        private List<string> Yy;
+        private List<string> Zz;
+
+        public HeatMap(List<string> Xx, List<string> Yy, List<string> Zz)
         {
-            this.heatPoints = new List<HeatPoint>(); 
+            this.heatPoints = new List<HeatPoint>();
+            this.Xx = Xx;
+            this.Yy = Yy;
+            this.Zz = Zz;
+
+            // to double 
+            
+
             InitializeComponent();
         }
 

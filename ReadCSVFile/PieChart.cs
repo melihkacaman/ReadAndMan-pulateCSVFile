@@ -129,8 +129,6 @@ namespace ReadCSVFile
         {
         }
 
-       
-
         private string getRandColor()
         {            
             string hexOutput = String.Format("{0:X}", rnd.Next(0, 0xFFFFFF));
