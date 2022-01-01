@@ -19,6 +19,12 @@ namespace ReadCSVFile
         private List<string> Yy;
         private List<string> Zz;
 
+        private List<double> Xx_double = new List<double>();
+        private List<double> Yy_double = new List<double>();
+        private List<double> Zz_double = new List<double>();
+
+        Random rRand = new Random();
+
         public HeatMap(List<string> Xx, List<string> Yy, List<string> Zz)
         {
             this.heatPoints = new List<HeatPoint>();
@@ -26,13 +32,28 @@ namespace ReadCSVFile
             this.Yy = Yy;
             this.Zz = Zz;
 
-            // to double 
+            for (int i = 0; i < Xx.Count; i++)
+            {
+                Xx_double.Add(double.Parse(Xx[i]));
+                Yy_double.Add(double.Parse(Yy[i]));
+                Zz_double.Add(double.Parse(Zz[i]));
+            }
+
+            FeatureScaler featureScaler_x = new FeatureScaler(Xx_double, 200);
+            Xx_double = featureScaler_x.ScaleData();
+            FeatureScaler featureScaler_y = new FeatureScaler(Xx_double, 200);
+            Yy_double = featureScaler_y.ScaleData();
+            FeatureScaler featureScaler_z = new FeatureScaler(Xx_double, 120);
+            Zz_double = featureScaler_z.ScaleData();
             
 
             InitializeComponent();
+
+            
+            WindowState = FormWindowState.Maximized;
         }
 
-        private Bitmap CreateIntensityMask(Bitmap bSurface, List<HeatPoint> aHeatPoints) 
+        private Bitmap CreateIntensityMask(Bitmap bSurface, List<HeatPoint> aHeatPoints)
         {
             Graphics DrawSurface = Graphics.FromImage(bSurface);
 
@@ -47,8 +68,8 @@ namespace ReadCSVFile
         }
 
         private void DrawHeatPoint(Graphics Canvas, HeatPoint HeatPoint, int Radius)
-        {           
-            List<Point> CircumferencePointsList = new List<Point>();            
+        {
+            List<Point> CircumferencePointsList = new List<Point>();
             Point CircumferencePoint;
             Point[] CircumferencePointsArray;
             float fRatio = 1F / Byte.MaxValue;
@@ -114,11 +135,14 @@ namespace ReadCSVFile
         private void button1_Click(object sender, EventArgs e)
         {
             Bitmap bMap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Random rRand = new Random();
+
             int iX;   // 0 - 200 
             int iY;   // 0 - 200 
             byte iIntense; // 0 - 120 
-            for (int i = 0; i < 500; i++)
+
+            int heatPointsCount = 300;
+
+            for (int i = 0; i < heatPointsCount; i++)
             {
                 iX = rRand.Next(0, 200);
                 iY = rRand.Next(0, 200);
@@ -126,8 +150,53 @@ namespace ReadCSVFile
                 // Add heat point to heat points list
                 heatPoints.Add(new HeatPoint(iX, iY, iIntense));
             }
+
+            int y_contoller = 0, x_controller = 0;
+
+            createHeatLabels(heatPoints);
             bMap = CreateIntensityMask(bMap, heatPoints);
             pictureBox1.Image = Colorize(bMap, 255);
         }
+
+        private void createHeatLabels(List<HeatPoint> heatPointss)
+        {
+            int count = heatPointss.Count;
+            int spaceX = 0;
+            int spaceY = 0; 
+           
+            if (count < pictureBox1.Height)
+            {
+                spaceY = pictureBox1.Height / count;                 
+            }
+            else 
+            {
+                spaceY = pictureBox1.Height;        
+            }
+
+            if (count < pictureBox1.Width)
+            {
+                spaceX = pictureBox1.Width / count;
+            }
+            else {
+                spaceX = pictureBox1.Width; 
+            }
+
+
+            int controlX = 0; 
+            foreach (HeatPoint item in heatPointss)
+            {
+                // X 
+                Label labelx = new Label();
+                labelx.Text = item.X.ToString();
+                labelx.SetBounds(50, controlX , 20, 20);
+                this.Controls.Add(labelx);
+                controlX = controlX + 20 + 2; 
+                // Y 
+                Label labely = new Label();
+                labely.Text = item.X.ToString();
+                labely.SetBounds(50 + spaceY + 50, 0 , 50, 50);
+                this.Controls.Add(labely);
+            }
+        }    
     }
 }
