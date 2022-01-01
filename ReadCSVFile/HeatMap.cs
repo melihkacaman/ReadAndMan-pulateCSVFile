@@ -47,10 +47,7 @@ namespace ReadCSVFile
             Zz_double = featureScaler_z.ScaleData();
             
 
-            InitializeComponent();
-
-            
-            WindowState = FormWindowState.Maximized;
+            InitializeComponent();                      
         }
 
         private Bitmap CreateIntensityMask(Bitmap bSurface, List<HeatPoint> aHeatPoints)
@@ -117,7 +114,7 @@ namespace ReadCSVFile
         private static ColorMap[] CreatePaletteIndex(byte Alpha)
         {
             ColorMap[] OutputMap = new ColorMap[256];
-            Bitmap Palette = (Bitmap)Bitmap.FromFile(@"C:\Users\melih\OneDrive\Desktop\palette2.jpeg");
+            Bitmap Palette = (Bitmap)Bitmap.FromFile(@"C:\Users\melih\OneDrive\Desktop\palette2.1.jpeg");
             for (int X = 0; X <= 255; X++)
             {
                 OutputMap[X] = new ColorMap();
@@ -134,69 +131,62 @@ namespace ReadCSVFile
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.heatPoints = new List<HeatPoint>();
+            Bitmap bMap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            int iX;   // 0 - 200 
+            int iY;   // 0 - 200 
+            byte iIntense; // 0 - 120 
+      
+             
+            for (int i = 0; i < 500; i++)
+            {
+                iX = rRand.Next(0, 200);                
+                iY = rRand.Next(0, 200);
+                iIntense = (byte)rRand.Next(0, 120);
+                heatPoints.Add(new HeatPoint(iX, iY, iIntense));
+            }
+           
+            // createHeatLabels(X, Y);
+            bMap = CreateIntensityMask(bMap, heatPoints);
+            //pictureBox1.Image = Colorize(bMap, 255);
+            pictureBox1.Image = bMap;
+        }
+
+        private void createHeatLabels(List<int> X, List<int> Y)
+        {
+            int biggestX = X.Max();
+            int smallestX = X.Min();
+
+            int biggestY = Y.Max();
+            int smallestY = Y.Min();
+
+            Label bigX = new Label();
+            bigX.Text = biggestX.ToString();
+            bigX.SetBounds(pictureBox1.Bounds.X - 5, pictureBox1.Bounds.Y - 5, 50, 50);
+            this.Controls.Add(bigX);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.heatPoints = new List<HeatPoint>(); 
             Bitmap bMap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             int iX;   // 0 - 200 
             int iY;   // 0 - 200 
             byte iIntense; // 0 - 120 
 
-            int heatPointsCount = 300;
-
-            for (int i = 0; i < heatPointsCount; i++)
+            for (int i = 0; i < Xx_double.Count; i++)
             {
-                iX = rRand.Next(0, 200);
-                iY = rRand.Next(0, 200);
-                iIntense = (byte)rRand.Next(0, 120);
-                // Add heat point to heat points list
-                heatPoints.Add(new HeatPoint(iX, iY, iIntense));
+                iX = Convert.ToInt32(Xx_double[i]);
+                iY = Convert.ToInt32(Yy_double[i]);
+                iIntense = Convert.ToByte(Zz_double[i]);
+
+                this.heatPoints.Add(new HeatPoint(iX, iY, iIntense));
             }
 
-            int y_contoller = 0, x_controller = 0;
-
-            createHeatLabels(heatPoints);
             bMap = CreateIntensityMask(bMap, heatPoints);
-            pictureBox1.Image = Colorize(bMap, 255);
+            pictureBox1.Image = bMap;
         }
-
-        private void createHeatLabels(List<HeatPoint> heatPointss)
-        {
-            int count = heatPointss.Count;
-            int spaceX = 0;
-            int spaceY = 0; 
-           
-            if (count < pictureBox1.Height)
-            {
-                spaceY = pictureBox1.Height / count;                 
-            }
-            else 
-            {
-                spaceY = pictureBox1.Height;        
-            }
-
-            if (count < pictureBox1.Width)
-            {
-                spaceX = pictureBox1.Width / count;
-            }
-            else {
-                spaceX = pictureBox1.Width; 
-            }
-
-
-            int controlX = 0; 
-            foreach (HeatPoint item in heatPointss)
-            {
-                // X 
-                Label labelx = new Label();
-                labelx.Text = item.X.ToString();
-                labelx.SetBounds(50, controlX , 20, 20);
-                this.Controls.Add(labelx);
-                controlX = controlX + 20 + 2; 
-                // Y 
-                Label labely = new Label();
-                labely.Text = item.X.ToString();
-                labely.SetBounds(50 + spaceY + 50, 0 , 50, 50);
-                this.Controls.Add(labely);
-            }
-        }    
     }
 }
